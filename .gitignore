@@ -1,0 +1,62 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Build, distribution, and packaging
+build/
+dist/
+wheels/
+
+# Test and cache files
+.pytest_cache/
+.ruff_cache/
+
+# Version file
+src/_version.py
+
+# IDE/editor/project files
+.vscode/
+.vscode/settings.json
+.idea/
+.notes/
+*.swp
+*.swo
+
+# Streamlit and other tool folders
+.streamlit/
+
+# Reports and test folders
+.reports/
+.reports/allure/
+.reports/
+
+# Logs, data, and backup
+*.log
+*.logs
+logs/
+data/
+data_*
+secdata_*
+backup/
+temp/sample/
+./sample/
+
+# Database and environment files
+*.db
+*.sqlite
+*.dbml
+*.env
+user_info.json
+
+# Miscellaneous
+*.instructions.md
+*.prompt.md
+*.chatmode.md
