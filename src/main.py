@@ -74,6 +74,9 @@ reseller = st.Page(
     "reports/reseller/pg_reseller.py", title="Reseller", icon=":material/person_add:"
 )
 
+digipos = st.Page(
+    "addon/pg_digipos.py", title="Digipos API", icon=":material/api:", default=False
+)
 
 # --- Navigation ---
 if st.session_state.logged_in:
@@ -81,6 +84,7 @@ if st.session_state.logged_in:
         pages={
             "Account": [logout_page],
             "Reports": [dashboard, voucher, reseller],
+            "Addons": [digipos],
         },
         position="sidebar",
     )
