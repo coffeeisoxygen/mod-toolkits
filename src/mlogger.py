@@ -211,6 +211,7 @@ class LoggerManager:
                     loguru_logger.log(self.level, line.rstrip())
 
             def flush(self) -> None:
+                """This is needed for compatibility with Python's print()."""
                 pass
 
         sys.stdout = StreamToLogger("INFO")
@@ -226,7 +227,7 @@ class LoggerManager:
             loguru_logger.opt(exception=exc_value).critical("Unhandled exception")
 
         def handle_async_exception(
-            loop: asyncio.AbstractEventLoop,
+            loop: asyncio.AbstractEventLoop,  # noqa: ARG001
             context: dict[str, Any],
         ):
             msg = context.get("message", "Async exception")
