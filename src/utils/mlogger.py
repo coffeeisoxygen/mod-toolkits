@@ -180,7 +180,7 @@ class LoggerManager:
             self._patch_stdout()
         if self.config.enable_exception_hooks:
             self._setup_exception_hooks()
-        logger_patched.info("Logging initialized")
+        logger_patched.info(f"log sudah diinisialisasi: {self.config}")
 
     def _get_format(self) -> str:
         return (

@@ -6,7 +6,7 @@ from utils.mlogger import LogConfig, LoggerManager, logger
 def setup_logger() -> None:
     """Initialize the logger for the application."""
     log_config = LogConfig(
-        level="INFO",
+        level="DEBUG",
         to_terminal=True,
         to_file=False,
         format_style="simple",
@@ -19,8 +19,7 @@ def setup_logger() -> None:
 if "logger_initialized" not in st.session_state:
     setup_logger()
     logger.info(f"Log diinisialisasi: {st.session_state.logger_initialized}")
-else:
-    logger.debug("Log sudah ter-setup : skipping.")
+
 
 # --- Init state default ---
 if "logged_in" not in st.session_state:
@@ -78,25 +77,28 @@ reseller = st.Page(
 
 # --- Navigation ---
 if st.session_state.logged_in:
-    pg = st.navigation({
-        "Account": [logout_page],
-        "Reports": [dashboard, voucher, reseller],
-    })
+    pg = st.navigation(
+        pages={
+            "Account": [logout_page],
+            "Reports": [dashboard, voucher, reseller],
+        },
+        position="sidebar",
+    )
 else:
-    pg = st.navigation([login_page])
+    pg = st.navigation(pages=[login_page])
 
 
 # --- Tracking Page Transition ---
 current_page = getattr(pg, "title", "Unknown Page")
 previous_page = st.session_state.get("current_page", "unknown")
 
+if current_page != previous_page:
+    user = st.session_state.get("username", "guest")
+    logger_ctx = logger.bind(user=user, navigasi=f"{previous_page} -> {current_page}")
+    logger_ctx.debug("User membuka halaman")
+
 # Update state
 st.session_state.current_page = current_page
-
-# Bind & log
-user = st.session_state.get("username", "guest")
-logger_ctx = logger.bind(user=user, navigasi=f"{previous_page} -> {current_page}")
-logger_ctx.info("User membuka halaman")
 
 # --- Run Page ---
 pg.run()
