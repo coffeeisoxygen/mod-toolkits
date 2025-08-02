@@ -32,7 +32,8 @@ if "current_page" not in st.session_state:
 
 
 # --- Login Page ---
-def login():
+def login() -> None:
+    """Just user login page."""
     st.subheader("Login")
     with st.form("login_form"):
         username = st.text_input("Username")
@@ -51,7 +52,8 @@ def login():
 
 
 # --- Logout Page ---
-def logout():
+def logout() -> None:
+    """Just user log out."""
     if st.button("Log out"):
         st.session_state.logged_in = False
         st.session_state.username = "guest"
